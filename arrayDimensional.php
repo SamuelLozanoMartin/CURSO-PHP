@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
+
 
 <?php
 $cars = array
@@ -9,20 +7,12 @@ $cars = array
   array("BMW",15,13),
   array("Saab",5,2),
   array("Land Rover",17,15)
-  );
-  define("stock",20);
-for ($row = 0; $row < 4; $row++) {
-	if ($cars[$row][1]<stock){
-		echo "<p><b>Row number $row</b></p>";
-  		echo "<ul>";
-  		for ($col = 0; $col < 3; $col++) {
-    		echo "<li>".$cars[$row][$col]."</li>";
-  		}
-  		echo "</ul>";
-	}
-  
-}
-?>
 
-</body>
-</html>
+	if ($cars[$row][1]<stock): ?>
+  		<?php for ($col = 0; $col < 3; $col++): ?>
+  		<?php endfor ?>
+  		</ul>
+	<?php endif?>
+<?php endfor ?>
+
+
