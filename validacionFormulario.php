@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Formulario PHP</title>
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 </head>
 
 <style type="text/css">
