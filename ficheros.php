@@ -33,7 +33,7 @@
 		echo "<hr>";
 
 		$fichero=fopen("fichero2.txt", "r") or die ("No ha sio posible abrir el fichero");
-		echo fread($fichero,4);
+		echo fread($fichero,4);  //lee solo los 4 primeros caracteres, para que lea el fichero entero en lugar de 4, filesize("fichero.txt")
 		fclose($fichero);
 
 	?>
