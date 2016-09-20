@@ -9,6 +9,7 @@ class Tabla {
   private $mat=array();
   private $cantFilas;
   private $cantColumnas;
+  private $solor;
 
   public function getCantFilas(){
       return $this->cantFilas;
@@ -18,10 +19,11 @@ class Tabla {
       return $this->cantColumnas;
   }
 
-  public function __construct($fi,$co)
+  public function __construct($fi,$co,$color)
   {
     $this->cantFilas=$fi;
     $this->cantColumnas=$co;
+    $this->color=$color;
   }
 
   public function cargar($fila,$columna,$valor)
@@ -31,7 +33,7 @@ class Tabla {
 
   private function inicioTabla()
   {
-    echo '<table border="1">';
+    echo '<table border="1" style="color:' . $this->color . ';">';
   }
     
   private function inicioFila()
@@ -41,6 +43,7 @@ class Tabla {
 
   private function mostrar($fi,$co)
   {
+    
     echo '<td>'.$this->mat[$fi][$co].'</td>';
   }
 
@@ -72,9 +75,11 @@ class Tabla {
 
 
 $valor=1;
-$fila=20;
-$col=20;
-$tabla1=new Tabla($fila,$col);
+$fila=20;   //numero de filas
+$col=20;    //numero de columnas
+$color="blue";  //color del texto de la tabla
+
+$tabla1=new Tabla($fila,$col,$color);
 for($x=1;$x<=$fila;$x++)
 {
     for($y=1;$y<=$col;$y++)
