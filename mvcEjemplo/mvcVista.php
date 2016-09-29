@@ -7,7 +7,7 @@ $usuario1->get('juangutierrez@gmai.com');
 $template = file_get_contents('mvcTemplate.tpl');
 
 foreach ($usuario1->getRows() as $clave=>$valor) {
-$template = str_replace('{'.$clave.'}', $valor, $template);
+	$template = str_replace('{'.$clave.'}', $valor, $template);
 }
 
 print $template;
