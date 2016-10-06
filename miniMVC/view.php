@@ -1,5 +1,6 @@
 <?php
 require ("models.php");
+
 function set_identificadores($vista) {
 	$identificadores = array();
 	if($vista) {
@@ -15,6 +16,7 @@ function set_identificadores($vista) {
 	}
 }
 function armar_diccionario($vista, $data) {
+
 	$diccionario = array();
 	$identificadores = set_identificadores($vista);
 	if($identificadores) {
@@ -29,6 +31,7 @@ function armar_diccionario($vista, $data) {
 function render_data($vista, $data) {
 	$html = '';
 	if(($vista)&&($data)) {
+		
 		$diccionario = armar_diccionario($vista, $data);
 		if($diccionario) {
 			$html = file_get_contents('html/'.$vista.'.html');
@@ -39,14 +42,7 @@ function render_data($vista, $data) {
 	}
 	print $html;
 }
-/*$data = new ModeloUno();
-$data->a(25);
-settype($data, 'array');
-render_data("vista_1",$data);
 
-$data=new ModeloDos();
-$data->b(25,35);
-settype($data, 'array');
-render_data("vista_2",$data);*/
-enviar_data();
+
+
 ?>

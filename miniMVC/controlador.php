@@ -1,5 +1,6 @@
 <?php
 require_once "models.php";
+require_once('view.php');
 function capturar_evento() {
 	$vista = '';
 	if($_GET) {
@@ -32,9 +33,11 @@ function identificar_modelo($vista) {
 function invocar_modelo($modelo) {
 
 	if($modelo) {
+
 		$data = new $modelo();
 		if ($modelo=="ModeloUno"){
 			$data->a($_GET['propiedad']);
+			
 		}
 		elseif ($modelo=="ModeloDos"){
 			$data->b($_GET['propiedad_1'],$_GET['propiedad_2']);
@@ -42,26 +45,27 @@ function invocar_modelo($modelo) {
 		
 		settype($data, 'array');
 		return $data;
+
 	}
 	#las modificaciones al modelo se harían aquí
 }
 
 function enviar_data() {
+
 	$vista = capturar_evento();
 	if($vista) {
+
 		$modelo = identificar_modelo($vista);
 		if($modelo) {
+			
 			$data = invocar_modelo($modelo);
 			
 			if($data) {
-				require_once('view.php');
 				render_data($vista, $data);
 			}
 		}
 	}
 }
 
-
-
-
+enviar_data(); //SIEMPRE SE LLAMA AL CONTROLADOR
 ?>
