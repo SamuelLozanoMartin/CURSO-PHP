@@ -267,5 +267,6 @@ COUNT(docs_id) Num_docs
 FROM t_employees e
 LEFT OUTER JOIN t_documents d
 ON d.empl_id=e.empl_id
-GROUP BY e.empl_id;
-order by num_docs ASC LIMIT 1,2;
+GROUP BY e.empl_id
+order by num_docs ASC
+limit 1,3;
