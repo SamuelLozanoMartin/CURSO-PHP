@@ -54,7 +54,7 @@ ADD INDEX FK_PIEZ (PIEZ_ID),
   REFERENCES PIEZAS (PIEZ_ID);
 
 ALTER TABLE PRECIOS 
-ADD CONSTRAINT CT_UQ_PROV_PIEZ_ID UNIQUE(PROV_ID, PIEZ_ID)
+ADD CONSTRAINT CT_UQ_PROV_PIEZ_ID UNIQUE(PROV_ID, PIEZ_ID);
 
 INSERT INTO precios
 (prov_id,piez_id,precio)
@@ -118,19 +118,10 @@ VALUES
  ON pro.prov_id=pre.prov_id
  WHERE LOWER(PRO.prov_NOM)=LOWER('HONDA');
  
- /*Obtener un listado de los nombres de las piezas y los proveedores que suministran esas piezas más caras, 
- indicando el nombre de la pieza y el precio al que la suministran
---NO FUNCIONA*/
+ 
 
-SELECT PIEZ_NOM,PROV_NOM,MAX(PRECIO) PRECIO_MAX
-FROM PRECIOS PRE
-INNER JOIN PROVEEDORES PRO
-ON PRO.PROV_ID=PRE.PROV_ID
-INNER JOIN PIEZAS PI
-ON PI.PIEZ_ID=PRE.PIEZ_ID
-GROUP BY PIEZ_NOM;
-
-/*OTRA FORMA DE REALIZAR LA ANTERIOR*/
+/*Obtener un listado de los nombres de las piezas y los proveedores que suministran esas piezas más caras, 
+ indicando el nombre de la pieza y el precio al que la suministran*/
 SELECT pz.PIEZ_NOM, po.PROV_NOM, PRECIO
 FROM PIEZAS pz
 INNER JOIN 

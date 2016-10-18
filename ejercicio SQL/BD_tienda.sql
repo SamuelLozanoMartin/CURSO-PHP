@@ -110,20 +110,26 @@ ON A.FAB_ID=F.FAB_ID
 GROUP BY F.FAB_ID
 HAVING PRECIO_MEDIO >=180;
 
-/*Obtener el nombre y el precio del artículo más barato*/***************************ERRORRRRRRR
-SELECT MIN(art_precio),art_nom
+/*Obtener el nombre y el precio del artículo más barato*/
+SELECT art_precio,art_nom
 FROM t_articulos
+WHERE art_precio
+IN
+(select min(art_precio) FROM t_articulos)
 
 ;
 
 /*Obtener una lista con el nombre y precio de los artículos más caros de cada proveedor
  (incluyendo el nombre del proveedor)*/
  
-SELECT art_nom,MAX(art_precio) PRECIO_MAX,fab_nombre,f.fab_id /*ERORRRRRRRRRRR*/
+SELECT art_nom,art_precio,fab_nombre,f.fab_id 
 from t_articulos a
 INNER JOIN t_fabricantes f
 ON f.fab_id=a.fab_id
-group by fab_nombre;
+WHERE art_precio
+IN
+(SELECT MAX(art_precio) FROM t_articulos
+group by fab_id);
 
 /*Añadir un nuevo producto: altavoces de 70€ del fabricante 2*/
 INSERT INTO t_articulos
