@@ -62,19 +62,26 @@ use AlimentosBundle\Model\Model;
          'hc' => '',
          'fibra' => '',
          'grasa' => '',
+         'alimento' => '',
+         'id'=>'',
          );
 
          $m = new Model(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario,
           Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
 
-         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	         // comprobar campos formulario
 	         if ($m->insertarAlimento($_POST['nombre'], $_POST['energia'],
 	          $_POST['proteina'], $_POST['hc'], $_POST['fibra'], $_POST['grasa'])) {
 	             $params['mensaje'] = 'Alimento insertado correctamente';
-	         } 
-	         else {
+
+	         //tras insertar, mostramos el alimento insertado
+	        
+	         $params['alimento'] = $m->buscarAlimentosPorNombre($_POST['nombre']);
+	         
+	    	} 
+	    	else {
 	             $params = array(
 	             'nombre' => $_POST['nombre'],
 	             'energia' => $_POST['energia'],
@@ -84,13 +91,11 @@ use AlimentosBundle\Model\Model;
 	             'grasa' => $_POST['grasa'],
 	             );
 	             $params['mensaje'] = 'No se ha podido insertar el alimento. Revisa el formulario';
-	         }
-         }
+	       	}
+        }
 
          return
-          $this->render('AlimentosBundle:Default:formInsertar.html.twig',
-          $params);
-
+          $this->render('AlimentosBundle:Default:formInsertar.html.twig',$params);
      }
      public function buscarPorNombreAction()
      {
@@ -103,8 +108,8 @@ use AlimentosBundle\Model\Model;
                          Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
 
          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-         $params['nombre'] = $_POST['nombre'];
-         $params['resultado'] = $m->buscarAlimentosPorNombre($_POST['nombre']);
+         	$params['nombre'] = $_POST['nombre'];
+         	$params['resultado'] = $m->buscarAlimentosPorNombre($_POST['nombre']);
          }
 
          return

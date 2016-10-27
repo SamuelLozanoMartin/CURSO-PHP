@@ -29,5 +29,7 @@
     <input type="submit" value="insertar" name="insertar" />
 </form>
 * Los valores deben referirse a 100 g del alimento
-
+{% if alimento %}
+    {% include 'AlimentosBundle:Default:_tablaAlimentos.html.twig' with {'alimentos': alimento} %}
+  {% endif %}
 {% endblock %}

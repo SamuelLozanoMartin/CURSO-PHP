@@ -46,8 +46,7 @@
      {
          $nombre = htmlspecialchars($nombre);
 
-         $sql = "select * from alimentos where nombre like '" . $nombre . "' order
- by energia desc";
+         $sql = "select * from alimentos where nombre like '%" . $nombre . "%' order by energia desc";
 
          $result = mysqli_query($this->conexion,$sql);
 
