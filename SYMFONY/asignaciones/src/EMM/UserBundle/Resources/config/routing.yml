@@ -1,0 +1,13 @@
+emm_user_homepage:
+    path:     /
+    defaults: { _controller: EMMUserBundle:Default:index }
+
+emm_user_index:
+    path: /user/index
+    defaults: {_controller: EMMUserBundle:User:index }
+
+emm_user_articles:
+    path: /user/articles/{page}
+    defaults: {_controller: EMMUserBundle:User:articles, page: 1 }
+    requirements:
+        page: \d+
