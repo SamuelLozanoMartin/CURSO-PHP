@@ -36,89 +36,89 @@ try {
         $conn->query("SET NAMES 'utf8'");
 
         // Check connection
-        if (!$conn) {
+        if (!$conn):
             die("Connection failed: " . mysqli_connect_error());
-        }
+        endif;
         
         
-        if ($_SERVER["REQUEST_METHOD"] == "POST" ){
+        if ($_SERVER["REQUEST_METHOD"] == "POST" ):
             
             //validacion nombre
-            if (empty($_POST["nombre"])) {
+            if (empty($_POST["nombre"])):
                 $nameErr = "Nombre obligatorio";
                 
-            } 
-            else {
+            
+            else:
                 $name = test_input($_POST["nombre"]);
                 // check if name only contains letters and whitespace
-                if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+                if (!preg_match("/^[a-zA-Z ]*$/",$name)):
                   $nameErr = "Solo esta permitido letras y espacions en blanco"; 
-                }
+                endif;
                 
-            }
+            endif;
            
             //validacion apellidos
-            if (empty($_POST["apellidos"])) {
+            if (empty($_POST["apellidos"])):
                 $apellidosErr = "Apellidos obligatorios";
                
                 
-            } 
-            else {
+             
+            else:
                 $apellidos = test_input($_POST["apellidos"]);
                 // check if name only contains letters and whitespace
-                if (!preg_match("/^[a-zA-Z ]*$/",$apellidos)) {
+                if (!preg_match("/^[a-zA-Z ]*$/",$apellidos)):
                   $apellidosErr = "Solo esta permitido letras y espacios en blanco"; 
-                }
+                endif;
                 
-            }
+            endif;
 
             //validacion de fecha
             echo ($_POST['fechaNacimiento'] . "fecha");
-            if (empty($_POST['fechaNacimiento'])){
+            if (empty($_POST['fechaNacimiento'])):
                 $fechaErr = "la fecha es obligatoria";
-            }
-            else{
+            
+            else:
                 $fecha=$_POST['fechaNacimiento'];
                 $fecha=explode("-", $fecha);
-                if (sizeof($fecha) !=3){
+                if (sizeof($fecha) !=3):
                     $fechaErr="Fecha incorrecta";
 
-                }
-                elseif ($fecha[0]> date(Y)){
+                
+                elseif ($fecha[0]> date(Y)):
                     $fechaErr="Todavia no has nacido";
-                }
+                
 
-                elseif (checkdate($fecha[1],$fecha[2],$fecha[0])==false){
+                elseif (checkdate($fecha[1],$fecha[2],$fecha[0])==false):
                     $fechaErr="Fecha incorrecta";
-                }
-            }
+                endif;
+            endif;
 
-            if ($apellidosErr=="" && $nameErr=="" && $fechaErr==""){
+            if ($apellidosErr=="" && $nameErr=="" && $fechaErr==""):
                 $sql="INSERT INTO empleados (nombre, apellidos,fechaNacimiento) 
                     VALUES ('".$name."','". $apellidos."','". $_POST['fechaNacimiento']. "')";
-                    if ($conn->query($sql) === TRUE) {
+                    if ($conn->query($sql) === TRUE):
                         echo "Nuevo registro insertado";
-                    } else {
+                    else:
                         echo "Error: " . $sql . "<br>" . $conn->error;
-                    } 
-            }
-        }
+                    endif;
+            endif;
+        endif;
         
 
         $sql="SELECT id, nombre, apellidos,fechaNacimiento FROM empleados order by id DESC";
         
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0):
             // output data of each row
-            while($row = $result->fetch_assoc()) {
+            while($row = $result->fetch_assoc()):
                 $objMiembro = new miembros($row['id'],$row['nombre'],$row['apellidos'],$row['fechaNacimiento']);
                 array_push($miembro, $objMiembro);
-            }
-        }
-        else{
+            endwhile;
+        
+        else:
             echo "No hay datos para mostrar";
-        }
+        endif;
      
         echo $template->render(array (
             'miembro'=>$miembro,
