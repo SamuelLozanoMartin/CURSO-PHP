@@ -155,8 +155,8 @@
                         while($row = $result->fetch_assoc()) {
                 ?>
                             <tr>
-                                <td id=<?= $row["id"]?>><?= $row["id"]?></td>
-                                <td <?= $row["nombre"]?>><?= $row["nombre"]?></td>
+                                <td><?= $row["id"]?></td>
+                                <td><?= $row["nombre"]?></td>
                                 <td><?= $row["apellidos"]?></td>
                                 <td><?= $row["fechaNacimiento"]?></td>
                             </tr>
