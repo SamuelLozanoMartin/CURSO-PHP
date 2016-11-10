@@ -40,7 +40,7 @@ try {
             die("Connection failed: " . mysqli_connect_error());
         endif;
         
-        
+        //INSERTAR
         if ($_SERVER["REQUEST_METHOD"] == "POST" ):
             
             //validacion nombre
@@ -104,7 +104,17 @@ try {
             endif;
         endif;
         
+        //DELETE
+        if ($_SERVER["REQUEST_METHOD"]=="GET" && $_GET["id"]!=""):
+            $sql="DELETE FROM empleados WHERE id=" . $_GET["id"];
+            if ($conn->query($sql) === TRUE):
+                echo "Empleado eliminado";
+            else:
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            endif;
+        endif;
 
+        //SELECT
         $sql="SELECT id, nombre, apellidos,fechaNacimiento FROM empleados order by id DESC";
         
         $result = $conn->query($sql);
@@ -120,6 +130,7 @@ try {
             echo "No hay datos para mostrar";
         endif;
      
+        //MANDAS LAS VARIABLES A LA PLANTILLA
         echo $template->render(array (
             'miembro'=>$miembro,
             'nameErr'=>$nameErr,
