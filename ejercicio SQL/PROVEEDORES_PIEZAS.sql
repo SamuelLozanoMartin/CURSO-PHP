@@ -17,6 +17,17 @@ CREATE TABLE PRECIOS(
 	PRECIO DECIMAL(10,2) UNSIGNED DEFAULT NULL,
 	PRIMARY KEY (PREC_ID)
 );
+ 
+	id_tareas int not null auto_increment,
+    tarea varchar(20) not null,
+    descripcion varchar(150) not null,
+    cobrado decimal(10,2) not null,
+    gastado decimal(10,2) not null,
+    pagado boolean not null,
+    id_clientes int not null,
+    primary key (id_tareas)
+);
+
 
 
 INSERT INTO PROVEEDORES(
